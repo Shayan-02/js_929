@@ -12,7 +12,8 @@ console.log(a);
 
 let d = 10; // ✅
 d = 20;
-const e = 30;
-e = 40;
-console.log(c);
+const e = 30; // ✅
+// e = 40;
+// console.log(c);
+console.log(d);
 console.log(d);
