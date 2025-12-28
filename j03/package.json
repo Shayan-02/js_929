@@ -1,0 +1,14 @@
+{
+  "name": "j03",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "dev": "nodemon ./assets/js/script.js",
+    "start": "nodemon ./assets/js/script3.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
