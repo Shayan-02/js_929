@@ -1,0 +1,13 @@
+{
+  "name": "j04",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./assets/js/script.js",
+  "scripts": {
+    "start": "nodemon ./assets/js/script.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
