@@ -1,0 +1,20 @@
+{
+  "name": "js_929",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "nodemon ./assets/js/script4.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shayan-02/js_929.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Shayan-02/js_929/issues"
+  },
+  "homepage": "https://github.com/Shayan-02/js_929#readme"
+}
