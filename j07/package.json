@@ -1,0 +1,14 @@
+{
+  "name": "j07",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "s1": "node ./assets/js/script.js",
+    "s2": "nodemon ./assets/js/script2.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}

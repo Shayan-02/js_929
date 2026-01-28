@@ -1,0 +1,31 @@
+body {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  flex-direction: column;
+  gap: 62px;
+}
+
+.button {
+  padding: 8px 16px;
+  background: rgb(50, 115, 255);
+  cursor: pointer;
+  color: white;
+  outline: none;
+  transition: all ease 250ms;
+  border: 3px solid rgb(95, 172, 255);
+  border-radius: 12px;
+  font-size: 24px;
+}
+
+.button:hover {
+  background: rgb(0, 81, 255);
+}
+
+.button:active {
+  border: 16px sold green;
+  scale: 0.95;
+}
