@@ -1,0 +1,49 @@
+<!-- examples/interval-basic/index.html -->
+<!doctype html>
+<html lang="fa">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="styles.css" />
+        <title>setInterval Basic</title>
+        <style>
+            body {
+                font-family: sans-serif;
+                padding: 1rem;
+            }
+            #tick {
+                font-size: 2rem;
+                margin-top: 1rem;
+            }
+            button {
+                margin-right: 0.5rem;
+            }
+        </style>
+    </head>
+    <body>
+        <button id="start">شروع</button>
+        <button id="stop">توقف</button>
+        <div id="tick">0</div>
+        <script>
+            // examples/interval-basic/app.js
+            let i = 20;
+            let intId = null;
+
+            const start = document.getElementById("start");
+            const stopBtn = document.getElementById("stop");
+            const tick = document.getElementById("tick");
+
+            start.addEventListener("click", () => {
+                if (intId) return; // جلوگیری از چندباره شروع شدن
+                intId = setInterval(() => {
+                    tick.textContent = String(--i);
+                }, 1000);
+            });
+
+            stopBtn.addEventListener("click", () => {
+                clearInterval(intId);
+                intId = null;
+            });
+        </script>
+    </body>
+</html>
