@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fa">
+  <head>
+    <meta charset="UTF-8" />
+    <title>تایمر</title>
+    <style>
+      body {
+        font-family: "Vazir", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        direction: rtl;
+        background-color: #f0f0f0;
+      }
+      .timer-container {
+        background: linear-gradient(120deg, rgba(77, 255, 172, 0.5), rgba(188, 147, 255, 0.5));
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      input {
+        width: 80px;
+        padding: 8px;
+        font-size: 16px;
+        margin: 0 5px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        outline: none;
+        background-color: transparent;
+        text-align: center;
+      }
+      button {
+        margin-top: 15px;
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        background-color: #4caf50;
+        color: white;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      #countdown {
+        margin-top: 20px;
+        font-size: 24px;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="timer-container">
+      <button onclick="toggleLanguage()">
+        <span id="toggle-lang">en</span>
+      </button>
+      <h2 id="timer-title">تایمر معکوس</h2>
+      <input type="number" id="hours" placeholder="ساعت" min="0" />
+      <input type="number" id="minutes" placeholder="دقیقه" min="0" max="59" />
+      <input type="number" id="seconds" placeholder="ثانیه" min="0" max="59" />
+      <br />
+      <button onclick="startTimer()">
+        <span id="start-button">شروع</span>
+      </button>
+      <div id="countdown"></div>
+    </div>
+
+    <script>
+      let interval;
+      let currentLanguage = "fa"; // Default language is Persian
+
+      const languageStrings = {
+        fa: {
+          title: "تایمر معکوس",
+          startButton: "شروع",
+          toggleLang: "en",
+          hoursPlaceholder: "ساعت",
+          minutesPlaceholder: "دقیقه",
+          secondsPlaceholder: "ثانیه",
+          invalidTime: "زمان نامعتبره!",
+          timeUp: "⏰ تمام شد!"
+        },
+        en: {
+          title: "Countdown Timer",
+          startButton: "Start",
+          toggleLang: "fa",
+          hoursPlaceholder: "Hours",
+          minutesPlaceholder: "Minutes",
+          secondsPlaceholder: "Seconds",
+          invalidTime: "Invalid time!",
+          timeUp: "⏰ Time's up!"
+        }
+      };
+
+      // Detect the user's language and set the form language
+      function detectLanguage() {
+        const userLang = navigator.language || navigator.userLanguage;
+        currentLanguage = userLang.includes("en") ? "en" : "fa";
+        setLanguage();
+      }
+
+      // Set language based on the current setting
+      function setLanguage() {
+        const strings = languageStrings[currentLanguage];
+        document.getElementById("timer-title").textContent = strings.title;
+        document.getElementById("start-button").textContent = strings.startButton;
+        document.getElementById("toggle-lang").textContent = strings.toggleLang;
+        document.getElementById("hours").placeholder = strings.hoursPlaceholder;
+        document.getElementById("minutes").placeholder = strings.minutesPlaceholder;
+        document.getElementById("seconds").placeholder = strings.secondsPlaceholder;
+
+        // document.body.style.direction = currentLanguage === "fa" ? "rtl" : "ltr";
+        if (currentLanguage === "fa") {document.body.style.direction = "rtl";} 
+        else {document.body.style.direction = "ltr";}
+        document.querySelectorAll("input").forEach((input) => {
+          input.style.textAlign = currentLanguage === "fa" ? "right" : "center";
+        });
+      }
+
+      // Toggle between Persian and English
+      function toggleLanguage() {
+        currentLanguage = currentLanguage === "fa" ? "en" : "fa";
+        setLanguage();
+      }
+
+      // Start the timer
+      function startTimer() {
+        clearInterval(interval);
+        const h = +(document.getElementById("hours").value) || 0;
+        const m = +(document.getElementById("minutes").value) || 0;
+        const s = +(document.getElementById("seconds").value) || 0;
+
+        let totalSeconds = h * 3600 + m * 60 + s;
+
+        if (totalSeconds <= 0) {
+          document.getElementById("countdown").textContent =
+            languageStrings[currentLanguage].invalidTime;
+          return;
+        }
+
+        updateDisplay(totalSeconds);
+
+        interval = setInterval(() => {
+          totalSeconds--;
+          updateDisplay(totalSeconds);
+          if (totalSeconds <= 0) {
+            clearInterval(interval);
+            document.getElementById("countdown").textContent =
+              languageStrings[currentLanguage].timeUp;
+          }
+        }, 1000);
+      }
+
+      // Update the countdown display
+      function updateDisplay(secondsLeft) {
+        let hrs = Math.floor(secondsLeft / 3600);
+        let mins = Math.floor((secondsLeft % 3600) / 60);
+        let secs = secondsLeft % 60;
+
+        if (hrs < 10) hrs = "0" + hrs;
+        if (mins < 10) mins = "0" + mins;
+        if (secs < 10) secs = "0" + secs;
+
+        document.getElementById("countdown").textContent =
+          `${hrs} : ${mins} : ${secs}`;
+      }
+
+      // Set language on page load
+      window.onload = detectLanguage;
+    </script>
+  </body>
+</html>

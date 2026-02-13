@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fa">
+  <head>
+    <meta charset="UTF-8" />
+    <title>تایمر</title>
+    <style>
+      body {
+        font-family: "Vazir", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        direction: rtl;
+        background-color: #f0f0f0;
+      }
+      .timer-container {
+        background: linear-gradient(120deg, rgba(77, 255, 172, 0.5), rgba(188, 147, 255, 0.5));
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        text-align: center;
+
+      }
+      input {
+        width: 80px;
+        padding: 8px;
+        font-size: 16px;
+        margin: 0 5px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        outline: none;
+        background-color: transparent;
+        text-align: center;
+      }
+      button {
+        margin-top: 15px;
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        background-color: #4caf50;
+        color: white;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      #countdown {
+        margin-top: 20px;
+        font-size: 24px;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="timer-container">
+        <button onclick="toggleLanguage()">
+          <span id="toggle-lang">en</span>
+        </button>
+      <h2 id="timer-title">تایمر معکوس</h2>
+      <input type="number" id="hours" placeholder="ساعت" min="0" />
+      <input type="number" id="minutes" placeholder="دقیقه" min="0" max="59" />
+      <input type="number" id="seconds" placeholder="ثانیه" min="0" max="59" />
+      <br />
+      <button onclick="startTimer()">
+        <span id="start-button">شروع</span>
+      </button>
+      <div id="countdown"></div>
+    </div>
+
+    <script>
+      let interval;
+      let currentLanguage = "fa";
+
+      function detectLanguage() {
+        const userLang = navigator.language;
+        if (userLang.includes("en")) {
+          currentLanguage = "en";
+          setLanguage();
+        } else {
+          currentLanguage = "fa";
+          setLanguage();
+        }
+      }
+
+      // تغییر زبان فرم
+      function setLanguage() {
+        if (currentLanguage === "fa") {
+          document.getElementById("timer-title").textContent = "تایمر معکوس";
+          document.getElementById("start-button").textContent = "شروع";
+          document.getElementById("toggle-lang").textContent = "en";
+          document.getElementById("hours").placeholder = "ساعت";
+          document.getElementById("minutes").placeholder = "دقیقه";
+          document.getElementById("seconds").placeholder = "ثانیه";
+          document.body.style.direction = "ltr";
+          document
+            .querySelectorAll("input")
+            .forEach((input) => (input.style.textAlign = "center"));
+        } else {
+          document.getElementById("timer-title").textContent =
+            "Countdown Timer";
+          document.getElementById("start-button").textContent = "Start";
+          document.getElementById("toggle-lang").textContent = "fa";
+          document.getElementById("hours").placeholder = "Hours";
+          document.getElementById("minutes").placeholder = "Minutes";
+          document.getElementById("seconds").placeholder = "Seconds";
+          document.body.style.direction = "ltr";
+          document
+            .querySelectorAll("input")
+            .forEach((input) => (input.style.textAlign = "right"));
+        }
+      }
+
+      // تغییر زبان به فارسی یا انگلیسی
+      function toggleLanguage() {
+        if (currentLanguage === "fa") {
+          currentLanguage = "en";
+        } else {
+          currentLanguage = "fa";
+        }
+        setLanguage();
+      }
+
+      // شروع تایمر
+      function startTimer() {
+        clearInterval(interval); // اگه قبلاً یه تایمر بوده، قطعش کن
+        const h = Number(document.getElementById("hours").value) || 0;
+        const m = Number(document.getElementById("minutes").value) || 0;
+        const s = Number(document.getElementById("seconds").value) || 0;
+
+        let totalSeconds = h * 3600 + m * 60 + s;
+
+        if (totalSeconds <= 0) {
+          document.getElementById("countdown").textContent =
+            currentLanguage === "fa" ? "زمان نامعتبره!" : "Invalid time!";
+          return;
+        }
+
+        updateDisplay(totalSeconds);
+
+        interval = setInterval(() => {
+          totalSeconds--;
+          updateDisplay(totalSeconds);
+          if (totalSeconds <= 0) {
+            clearInterval(interval);
+            document.getElementById("countdown").textContent =
+              currentLanguage === "fa" ? "⏰ تمام شد!" : "⏰ Time's up!";
+          }
+        }, 1000);
+      }
+
+      // به‌روزرسانی نمایش تایمر
+      function updateDisplay(secondsLeft) {
+        let hrs = Math.floor(secondsLeft / 3600);
+        let mins = Math.floor((secondsLeft % 3600) / 60);
+        let secs = secondsLeft % 60;
+
+        if (hrs < 10) hrs = "0" + hrs;
+        if (mins < 10) mins = "0" + mins;
+        if (secs < 10) secs = "0" + secs;
+
+        document.getElementById("countdown").textContent =
+          hrs + " : " + mins + " : " + secs;
+      }
+
+      // در هنگام بارگذاری صفحه زبان را تنظیم کن
+      window.onload = detectLanguage;
+    </script>
+  </body>
+</html>
