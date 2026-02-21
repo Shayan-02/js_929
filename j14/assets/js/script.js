@@ -1,0 +1,9 @@
+// Add your JavaScript code here
+const Swal = require("sweetalert2");
+
+Swal.fire({
+  title: 'Error!',
+  text: 'Do you want to continue',
+  icon: 'error',
+  confirmButtonText: 'Cool'
+})
