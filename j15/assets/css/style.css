@@ -1,0 +1,24 @@
+:root{
+    --primary-text : #21aa23;
+    --secondary-color : #9a9a9a;
+    --white : #ddd;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    background-color: var(--white);
+}
+
+p{
+    color: var(--primary-text);
+}
+h1{
+    color: var(--primary-text);
+}
+h2{
+    color: var(--primary-text);
+}

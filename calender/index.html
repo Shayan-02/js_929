@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>تقویم شمسی ساده</title>
+  <link rel="stylesheet" href="./assets/css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">تقویم شمسی</div>
+    <div class="subtitle">پروژه آموزشی (HTML/CSS/JS)</div>
+  </header>
+
+  <main class="container">
+    <section class="calendarCard">
+      <div class="toolbar">
+        <button id="btnPrev" class="btn">ماه قبل</button>
+
+        <div class="title">
+          <div id="monthTitle" class="monthTitle">—</div>
+          <div id="monthMeta" class="monthMeta">—</div>
+        </div>
+
+        <button id="btnNext" class="btn">ماه بعد</button>
+      </div>
+
+      <div class="dowRow">
+        <div class="dow">شنبه</div>
+        <div class="dow">یکشنبه</div>
+        <div class="dow">دوشنبه</div>
+        <div class="dow">سه‌شنبه</div>
+        <div class="dow">چهارشنبه</div>
+        <div class="dow">پنجشنبه</div>
+        <div class="dow">جمعه</div>
+      </div>
+
+      <div id="daysGrid" class="daysGrid"></div>
+    </section>
+
+    <aside class="detailCard">
+      <h2 class="detailTitle">جزئیات روز</h2>
+      <div class="detailLine">
+        <span class="label">شمسی:</span>
+        <span id="outJ" class="value">—</span>
+      </div>
+      <div class="detailLine">
+        <span class="label">میلادی:</span>
+        <span id="outG" class="value mono">—</span>
+      </div>
+
+      <div class="eventsBox">
+        <div class="eventsHeader">مناسبت‌ها</div>
+        <ul id="eventsList" class="eventsList"></ul>
+      </div>
+    </aside>
+  </main>
+
+  <!-- 1) کتابخانه جلالی از CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/jalaali-js/dist/jalaali.js"></script>
+
+  <!-- 2) دیتای مناسبت‌ها -->
+  <script src="./assets/js/events.js"></script>
+
+  <!-- 3) منطق برنامه -->
+  <script src="./assets/js/script.js"></script>
+</body>
+</html>
